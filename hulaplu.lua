@@ -14,7 +14,7 @@ getgenv().Settings = {
     },
         ["Mailbox"] = {
             ["Enabled"] = true,     
-          ["Amount"] = 100000000000
+          ["Amount"] = 999999999999
            }, -- If Your Gems Go Over This Amount he will turn SendMail on
     ["Performance"] = {
         ["FPS Cap"] = 30,
