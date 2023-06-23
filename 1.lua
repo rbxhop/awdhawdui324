@@ -1,9 +1,6 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxhop/awdhawdui324/main/10.lua"))() -- 10 min file
-https://raw.githubusercontent.com/rbxhop/awdhawdui324/main/10.lua
-
 getgenv().Settings = {
-["Webhook"] = "https://discord.com/api/webhooks/1105890306374774896/zWeabHtGwuKobN8NZwfVWFuFlCTlgsBqLBfPHBsM-R9GgNDkJCoUCsdJaK1uZJG_SiMF",
-    ["timeframewh"] = "https://discord.com/api/webhooks/1121915352109023242/5an9rGXtTd3Wfbw02fsAECjnkCiwHRZbC6VOLkQD3cktY7PFkDuKXgs5cK1WluWoEcdx",
+--["Webhook"] = "https://discord.com/api/webhooks/1105890306374774896/zWeabHtGwuKobN8NZwfVWFuFlCTlgsBqLBfPHBsM-R9GgNDkJCoUCsdJaK1uZJG_SiMF", -- not in use right now
+    ["timeframewh"] = "https://discord.com/api/webhooks/1121915352109023242/5an9rGXtTd3Wfbw02fsAECjnkCiwHRZbC6VOLkQD3cktY7PFkDuKXgs5cK1WluWoEcdx", -- 60 min webhook
     ["timeframe"] = 60000, -- Seconds
     ["Farm Speed"] = 0.2,
     ["Minimum Oranges"] = 80,
@@ -11,7 +8,7 @@ getgenv().Settings = {
     ["Mystic Mine"] = true,
     ["Cyber Cavern"] = true,
     ["Minimum Multiplier"] = {
-        ["Giant Chest"] = 1,
+        ["Giant Chest"] = 0,
         ["Other"] = 0,
     },
         ["Mailbox"] = {
@@ -198,6 +195,9 @@ do -- Performance
         end
     end
 end
+
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxhop/awdhawdui324/main/10.lua"))() -- 10 min file
 
 function getEquippedPets()
     local pets = PetCmds.GetEquipped()
