@@ -17,8 +17,8 @@ getgenv().Settings = {
           ["Amount"] = 100000000000
            }, -- If Your Gems Go Over This Amount he will turn SendMail on
     ["Performance"] = {
-        ["FPS Cap"] = 60,
-        ["Disable Rendering"] = false,
+        ["FPS Cap"] = 30,
+        ["Disable Rendering"] = true,
         ["Downgraded Quality"] = true
     }
 }
