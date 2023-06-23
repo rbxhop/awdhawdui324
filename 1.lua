@@ -1,10 +1,12 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxhop/awdhawdui324/main/10.lua"))() -- 10 min file
+https://raw.githubusercontent.com/rbxhop/awdhawdui324/main/10.lua
 
 getgenv().Settings = {
 ["Webhook"] = "https://discord.com/api/webhooks/1105890306374774896/zWeabHtGwuKobN8NZwfVWFuFlCTlgsBqLBfPHBsM-R9GgNDkJCoUCsdJaK1uZJG_SiMF",
-    ["timeframewh"] = "https://discord.com/api/webhooks/1090060997605208186/-fvmCLnXqx6g4OSJCeHdw7HJ_pfMOxAYeX3_mLdtcDBnwyl0pzgsVDYN4-tDpn9HbpxG",
-    ["timeframe"] = 1800, -- Seconds
+    ["timeframewh"] = "https://discord.com/api/webhooks/1121915352109023242/5an9rGXtTd3Wfbw02fsAECjnkCiwHRZbC6VOLkQD3cktY7PFkDuKXgs5cK1WluWoEcdx",
+    ["timeframe"] = 60000, -- Seconds
     ["Farm Speed"] = 0.2,
-    ["Minimum Oranges"] = 1,
+    ["Minimum Oranges"] = 80,
     ["Maximum Oranges"] = 120,
     ["Mystic Mine"] = true,
     ["Cyber Cavern"] = true,
