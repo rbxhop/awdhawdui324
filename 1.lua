@@ -604,9 +604,10 @@ task.wait(0.1)
 if MB["Enabled"] and MB["Amount"] < Save.Get().Diamonds then
 mailing = true
 sendMail()
-wait(1)
+wait(7)
 writefile("gems.txt", "0")
-wait(1)
+wait(4)
+mailing = false
 end
             if getOrangeCount() < Settings["Minimum Oranges"] then
                 repeat
