@@ -600,7 +600,7 @@ task.wait(0.1)
         while task.wait() do
 
 if MB["Enabled"] and MB["Amount"] < Save.Get().Diamonds then
---mailing = true
+mailing = true
 sendMail()
 wait(5)
 writefile("gems.txt", "0")
