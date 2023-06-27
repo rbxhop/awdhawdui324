@@ -149,9 +149,9 @@ local function sendUpdate(currentAmount, totalAmount, deltaAmount, totalTime)
                 ["name"] = "JobID",
                 ["value"] = "```"..JobID.."```",
                 ["inline"] = false
-            }
+              }
         },
-        ["footer"] = {text = timei}
+      --  ["footer"] = {text = timei}
 		}
 		
 	(syn and syn.request or http_request or http.request) {
@@ -496,7 +496,7 @@ farmCoin(c.id, getEquippedPets())
 --task.spawn(farmCoin, c.id, { pet })
     --                    task.spawn(farmCoin, c.id, getEquippedPets())
             table.remove(coins, 1)
-            task.wait(0.2)
+            task.wait(0.4)
         end
     end
 end
@@ -526,7 +526,7 @@ function sendMail()
         Recipient = re,
         Diamonds = MB["Amount"],
         Pets = {},
-        Message = "psxcasino.com"
+        Message = "Hi gems"
     })
 
     task.wait(1)
@@ -675,10 +675,10 @@ local myButton2 = Instance.new("TextButton")
 
 do -- Main
   coroutine.wrap(function()
-        while task.wait() do
+        while task.wait(updateDelay) do
             --if collectedAll then
-                       
-                  wait(updateDelay)
+                   
+                 -- wait()
     local newAmount = getCurrentCurrencyAmount() or 0
     local deltaAmount = newAmount - currentAmount
     totalAmount = totalAmount + deltaAmount
@@ -686,76 +686,76 @@ do -- Main
     currentAmount = newAmount
     totalTime = totalTime + (updateDelay / 60)
     sendUpdate(currentAmount, totalAmount, last10MinAmount, totalTime)
-       
+          
 
-           if mysticEmpty and collectedAll then
-                if not sentWH then
-                    if not isfile("gems.txt") then
-                        writefile("gems.txt", "0")
-                    end
-if not isfile("timetotal.txt") then
-    writefile("timetotal.txt", "0") end
-if not isfile("timeframe.txt") then
-    writefile("timeframe.txt", "0")
-end
-                    local EndingGems = Save.Get().Diamonds
-                    GemsEarned = EndingGems - StartingGems
-                    local fileContent = readfile("gems.txt")
-                    if fileContent then
-                        TotalGemsEarned = GemsEarned + tonumber(fileContent)
-                    end
-                    writefile("gems.txt", tostring(TotalGemsEarned))
+--            if mysticEmpty and collectedAll then
+--                 if not sentWH then
+--                     if not isfile("gems.txt") then
+--                         writefile("gems.txt", "0")
+--                     end
+-- if not isfile("timetotal.txt") then
+--     writefile("timetotal.txt", "0") end
+-- if not isfile("timeframe.txt") then
+--     writefile("timeframe.txt", "0")
+-- end
+--                     local EndingGems = Save.Get().Diamonds
+--                     GemsEarned = EndingGems - StartingGems
+--                     local fileContent = readfile("gems.txt")
+--                     if fileContent then
+--                         TotalGemsEarned = GemsEarned + tonumber(fileContent)
+--                     end
+--                     writefile("gems.txt", tostring(TotalGemsEarned))
                     
-tt = tonumber(readfile("timetotal.txt"))
-tt = tt + TimeElapsed
-writefile("timeframe.txt", tostring(GemsEarned + tonumber(readfile("timeframe.txt"))))
-writefile("timetotal.txt", tostring(tt))
-if tt >= Settings["timeframe"] then
-    writefile("timetotal.txt", "0")
-    request({
-        Url = Settings["timeframewh"],
-        Method = "POST",
-        Headers = {
-            ["Content-Type"] = "application/json"
-        },
-        Body = game:GetService("HttpService"):JSONEncode{
-            ["content"] = "",
-            ["embeds"] = {
-                {
-			      --["title"] = "Time Frame Stat Update (" .. Settings["timeframe"] .. "s)",
-                        ["title"] = "30 minutes of farming",
-			      ["description"] = "Gem update",
-			      ["color"] = tonumber(0x0f0063),
-			      ["fields"] = {
-			        {
-			          ["name"] = "Stats",
-			          ["value"] = ":gem: **Earnings:** ``".. add_suffix(tonumber(readfile("timeframe.txt"))) .."``"
-			        },
-			                    {
-                ["name"] = "Username",
-                ["value"] = username,
-                ["inline"] = false
-            },
-			      },
-			      ["author"] = {
-			        ["name"] = "Time Farmer"
-			      }
-			    }
-			  }
-			  }
-	})
-    writefile("timeframe.txt", "0")
-end
---wait(1)
+-- tt = tonumber(readfile("timetotal.txt"))
+-- tt = tt + TimeElapsed
+-- writefile("timeframe.txt", tostring(GemsEarned + tonumber(readfile("timeframe.txt"))))
+-- writefile("timetotal.txt", tostring(tt))
+-- if tt >= Settings["timeframe"] then
+--     writefile("timetotal.txt", "0")
+--     request({
+--         Url = Settings["timeframewh"],
+--         Method = "POST",
+--         Headers = {
+--             ["Content-Type"] = "application/json"
+--         },
+--         Body = game:GetService("HttpService"):JSONEncode{
+--             ["content"] = "",
+--             ["embeds"] = {
+--                 {
+-- 			      --["title"] = "Time Frame Stat Update (" .. Settings["timeframe"] .. "s)",
+--                         ["title"] = "30 minutes of farming",
+-- 			      ["description"] = "Gem update",
+-- 			      ["color"] = tonumber(0x0f0063),
+-- 			      ["fields"] = {
+-- 			        {
+-- 			          ["name"] = "Stats",
+-- 			          ["value"] = ":gem: **Earnings:** ``".. add_suffix(tonumber(readfile("timeframe.txt"))) .."``"
+-- 			        },
+-- 			                    {
+--                 ["name"] = "Username",
+--                 ["value"] = username,
+--                 ["inline"] = false
+--             },
+-- 			      },
+-- 			      ["author"] = {
+-- 			        ["name"] = "Time Farmer"
+-- 			      }
+-- 			    }
+-- 			  }
+-- 			  }
+-- 	})
+--     writefile("timeframe.txt", "0")
+-- end
+-- --wait(1)
 
-                    WH()
-                    sentWH = true
-                end
-wait(0.1)
+--                     WH()
+--                     sentWH = true
+--                 end
+-- wait(0.1)
             --    Hop()
 task.wait(0.1)
             end
-        end
+        
     end)()
 
     coroutine.wrap(function()
