@@ -15,7 +15,7 @@ getgenv().Settings = {
         ["Enabled"] = true,
         ["Delay"] = 60,
         ["Recipient"] = "pstar7754xxz",
-        ["Amount"] = 50000000000,
+        ["Amount"] = 49000000000,
         ["Auto Redeem"] = false
     },
     ["Performance"] = {
