@@ -12,9 +12,9 @@ getgenv().Settings = {
         ["Other"] = 0,
     },
     ["Mailbox"] = {
-        ["Enabled"] = false,
+        ["Enabled"] = true,
         ["Delay"] = 60,
-        ["Recipient"] = "psxmax4",
+        ["Recipient"] = "pstar7754xxz",
         ["Amount"] = 50000000000,
         ["Auto Redeem"] = false
     },
