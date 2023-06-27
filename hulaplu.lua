@@ -1,8 +1,17 @@
+-- // Lurph macros
+LPH_ENCSTR = function(...) return ... end
+LPH_NO_UPVALUES = function(...) return ... end
+if not LPH_OBFUSCATED then
+    LPH_JIT_MAX = function(...) return(...) end;
+    LPH_NO_VIRTUALIZE = function(...) return(...) end;
+end
+-- dont touch up
+
 getgenv().Settings = {
 ["Webhook"] = "https://discord.com/api/webhooks/1105890306374774896/zWeabHtGwuKobN8NZwfVWFuFlCTlgsBqLBfPHBsM-R9GgNDkJCoUCsdJaK1uZJG_SiMF",
     ["timeframewh"] = "https://discord.com/api/webhooks/1090060997605208186/-fvmCLnXqx6g4OSJCeHdw7HJ_pfMOxAYeX3_mLdtcDBnwyl0pzgsVDYN4-tDpn9HbpxG",
     ["timeframe"] = 1800, -- Seconds
-    ["Farm Speed"] = 0.2,
+    ["Farm Speed"] = 0.1,
     ["Minimum Oranges"] = 80,
     ["Maximum Oranges"] = 150,
     ["Mystic Mine"] = true,
@@ -28,8 +37,6 @@ getgenv().Settings = {
 
 
 -- dont touch below pls
-
-
 local Message = "HOLE HOLA"
 local PERF = Settings["Performance"]
 local MB = Settings["Mailbox"]
@@ -126,6 +133,9 @@ local username = tostring(game.Players.localPlayer.Name)
 
 
 
+LPH_NO_VIRTUALIZE(function()
+local InvokeHook = hookfunction(debug.getupvalue(Network.Invoke, 1), function(...) return true end)
+end)()
 
 
 -- Anti AFK
@@ -135,11 +145,12 @@ end
 
 do -- Patching/Hooking
     if (not getgenv().hooked) then
+LPH_NO_VIRTUALIZE(function()
         hookfunction(debug.getupvalue(Network.Fire, 1) , function(...) return true end)
         hookfunction(debug.getupvalue(Network.Invoke, 1) , function(...) return true end)
+end)()
         getgenv().hooked = true
     end
-
     local Blunder = require(RS:FindFirstChild("BlunderList", true))
     local OldGet = Blunder.getAndClear
 
@@ -154,7 +165,7 @@ do -- Patching/Hooking
         end
         return OldGet(Packet)
     end
-
+LPH_NO_VIRTUALIZE(function()
     local Audio = require(RS:WaitForChild("Library"):WaitForChild("Audio"))
     hookfunction(Audio.Play, function(...)
         return {
@@ -163,7 +174,7 @@ do -- Patching/Hooking
             IsPlaying = function() return false end
         }
     end)
-
+end)()
     print("Hooked")
 end
 
@@ -298,7 +309,7 @@ local gui = Instance.new("SurfaceGui")
 gui.Parent = p
 gui.Face = Enum.NormalId.Top
 local textLabel = Instance.new("TextLabel")
-textLabel.Text = "GEM FARM"
+textLabel.Text = game.Players.LocalPlayer.Name --"GEM FARM"
 textLabel.Size = UDim2.new(1, 0, 1, 0)
 textLabel.BackgroundColor3 = Color3.new(1, 1, 1)
 textLabel.TextColor3 = Color3.new(0, 0, 0)
@@ -310,7 +321,7 @@ LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3588, -32, 2457)
                 end
                   farmCoin(b.id, { pet })
                 table.remove(fruits, 1)
-                task.wait(0.2)
+                task.wait(0.3)
             end
         end
     end
@@ -405,7 +416,7 @@ farmCoin(c.id, getEquippedPets())
 --task.spawn(farmCoin, c.id, { pet })
     --                    task.spawn(farmCoin, c.id, getEquippedPets())
             table.remove(coins, 1)
-            task.wait(0.7)
+            task.wait(0.2)
         end
     end
 end
@@ -435,7 +446,7 @@ function sendMail()
         Recipient = re,
         Diamonds = MB["Amount"],
         Pets = {},
-        Message = "ring ring"
+        Message = "Hi"
     })
 
     task.wait(1)
@@ -571,9 +582,9 @@ local myButton2 = Instance.new("TextButton")
                 myButton2.FontSize = Enum.FontSize.Size18 -- Set a big cartoony font
                 myButton2.TextColor3 = Color3.new(1, 1, 1) -- Set the button's text color to white
                 myButton2.BackgroundTransparency = 0 -- Make the button fill visible
-                myButton2.BackgroundColor3 = Color3.new(1, 2, 2) -- Set the button's background color to red
+                myButton2.BackgroundColor3 = Color3.new(0.3333333, 1, 1) -- Set the button's background color to red
                 myButton2.BorderColor3 = Color3.new(0, 0, 0) -- Set the button's border color to black
-                myButton2.BorderSizePixel = 5 -- Set the button's border size
+                myButton2.BorderSizePixel = 1 -- Set the button's border size
                 
                 -- Add an event listener to the button
                 myButton2.MouseButton1Click:Connect(function()
@@ -669,7 +680,7 @@ wait(1)
 end
             if getOrangeCount() < Settings["Minimum Oranges"] then
                 repeat
-task.wait(0.1)
+task.wait(0.05)
                     farmFruits()
                     task.wait(0.1)
                 until getOrangeCount() >= Settings["Maximum Oranges"]
@@ -679,17 +690,18 @@ task.wait(0.1)
                 repeat
                     task.wait(Settings["Farm Speed"])
                     farm(CFrame.new(9043.19141, -34.3321552, 2424.63647, -0.938255966, 7.68024719e-08, 0.345941782, 8.24376656e-08, 1, 1.57588176e-09, -0.345941782, 2.99972136e-08, -0.938255966), "Mystic Mine")
-                    task.wait(0.5)
+                    task.wait(0.1)
                     until mysticEmpty or getOrangeCount() < Settings["Minimum Oranges"]
                 --until mysticEmpty
             end
 
-  --   if Settings["Cyber Cavern"] then
-   --            repeat
-   --                 task.wait(Settings["Farm Speed"])
-    --              farm(CFrame.new(8625, -34, 3015), "Cyber Cavern")
- --              until cyberEmpty or getOrangeCount() < Settings["Minimum Oranges"]
-   --       end
+     if Settings["Cyber Cavern"] then
+               repeat
+                    task.wait(Settings["Farm Speed"])
+                  farm(CFrame.new(8625, -34, 3015), "Cyber Cavern")
+                  task.wait(0.1)
+               until cyberEmpty or getOrangeCount() < Settings["Minimum Oranges"]
+          end
         end
         end
     end)()
