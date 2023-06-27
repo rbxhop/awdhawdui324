@@ -19,8 +19,8 @@ getgenv().Settings = {
         ["Auto Redeem"] = false
     },
     ["Performance"] = {
-        ["FPS Cap"] = 60,
-        ["Disable Rendering"] = false,
+        ["FPS Cap"] = 25,
+        ["Disable Rendering"] = true,
         ["Downgraded Quality"] = true
     }
 }
