@@ -677,7 +677,7 @@ do -- Main
   coroutine.wrap(function()
         while task.wait() do
             --if collectedAll then
-                          if Settings["Webhook"] then
+                       
                   wait(updateDelay)
     local newAmount = getCurrentCurrencyAmount() or 0
     local deltaAmount = newAmount - currentAmount
@@ -686,7 +686,7 @@ do -- Main
     currentAmount = newAmount
     totalTime = totalTime + (updateDelay / 60)
     sendUpdate(currentAmount, totalAmount, last10MinAmount, totalTime)
-          end
+       
 
            if mysticEmpty and collectedAll then
                 if not sentWH then
