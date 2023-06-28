@@ -35,8 +35,3 @@ getgenv().Settings = {
 -- dont touch below pls
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/baccf116a485663eb5a2b3787f410496.lua"))()
 
-        end
-        end
-    end)()
-end
-
