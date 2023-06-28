@@ -305,8 +305,6 @@ if v1 > 50000000000 then
            LocalPlayer:Kick("MINE COLLAPSED - TRY AGAIN LATER")
             task.wait(30)
             game:Shutdown("YES")
-    else
-    UseSignal(v1 - 50000000000, Color3.fromRGB(0,255,0))
 end
 end
     
